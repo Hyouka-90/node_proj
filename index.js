@@ -42,6 +42,14 @@ try {
     }
 })
 
+app.delete('/book/delete/:id',async (req,res) =>{
+    const { id } = req.params;
+    await Book.findByIdAndDelete(id);
+    res.status(204).end;
+    res.send({ Deleted: true });
+
+})
+
 app.post('/book/add', async (req,res) =>{
     
     try {
