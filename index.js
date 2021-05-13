@@ -17,7 +17,7 @@ const PORT = process.env.PORT|| 9000;
 app.use(express.json());
 
 app.get('/allbook',async(req,res) => {
-    const books = await Book.find()
+    const books = await Book.find();
   res.json(books)
 
 })
@@ -32,7 +32,7 @@ app.get('/bookById/:id', async (req,res) =>{
     
 try {
 
-    const { id } = req.params
+    const { id } = req.params;
     const books = await Book.find({_id: id});
     console.log(books);
     res.send(books);
@@ -40,6 +40,24 @@ try {
     catch(e){
         console.log('Catch an error:',e);
     }
+})
+
+app.post('/book/add', async (req,res) =>{
+    
+    try {
+    
+         var nBook  = req.body;
+        //console.log(nBook);
+        const books = new Book(nBook);
+        //console.log(books);
+        await books.save();
+        //console.log(books);
+        res.status(201).end;
+        res.send({ success: true });
+        }
+        catch(e){
+            console.log('Catch an error:',e);
+        }
 })
 
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    _id: Number,
+    _id: { type: mongoose.Schema.Types.ObjectId , required: true ,auto:true  },
     title: String,
     isbn: String,
     pageCount: Number,
