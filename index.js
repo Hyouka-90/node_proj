@@ -60,6 +60,20 @@ app.post('/book/add', async (req,res) =>{
         }
 })
 
+app.put('/book/update/:id', async (req,res) =>{
+    try{
+
+        const { id } = req.params;
+        var nBook  = req.body;
+
+        const book = await Book.findByIdAndUpdate(id, { $set:nBook } ) ;
+        res.send({ updated: true });
+    }
+    catch(e){
+        console.log('Catch an error:',e);
+    }
+})
+
 
 app.listen(PORT,() => {
     console.log('Server is running on port : '+PORT )
